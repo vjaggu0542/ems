@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content container-fluid">
+       
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card">
+             <div class="card-body">
+                <form method="post" action="{% url 'update_employee' %}" enctype="multipart/form-data" > 
+                   {% csrf_token %}
+                   <div class="row">
+                      <div class="col-12">
+                         <h5 class="form-title"><span>Edit Employee</span></h5>
+                      </div>
+                      
+ 
+                      {% include 'includes/messages.html' %}
+                      <div class="col-12">
+                         <div class="form-group">
+                            <label>Profile pic</label>
+                            <input type="file"  class="form-control" name="profile_pic">
+                            <input type="text"  class="form-control" name="employee_id" value="{% for i in employee %}{{i.admin.id}}{% endfor %}" hidden>
+                         </div>
+                      </div>
+                     
+
+                      <div class="col-12">
+                         <div class="form-group">
+                            <label>First name</label>
+                            <input type="text"  class="form-control" name="first_name" value="{% for i in employee %}{{i.admin.first_name}}{% endfor %}">
+                         </div>
+                      </div>
+                      <div class="col-12 ">
+                         <div class="form-group">
+                            <label>Last name</label>
+                            <input type="text"  class="form-control" name="last_name" value="{% for i in employee %}{{i.admin.last_name}}{% endfor %}">
+                         </div>
+                      </div>
+                      <div class="col-12 ">
+                         <div class="form-group">
+                            <label>Email</label>
+                            <input type="text"  class="form-control" name="email" value="{% for i in employee %}{{i.admin.email}}{% endfor %}">
+                         </div>
+                      </div>
+                      <div class="col-12 ">
+                         <div class="form-group">
+                            <label>Uesr name</label>
+                            <input type="text"  class="form-control" name="username" value="{% for i in employee %}{{i.admin.username}}{% endfor %}">
+                         </div>
+                      </div>
+                      <div class="col-12 ">
+                         <div class="form-group">
+                            <label>Password</label>
+                            <input type="text"  class="form-control" name="password" placeholder="fill only if you want change the password">
+                         </div>
+                      </div>
+                      <div class="col-12 ">
+                        <div class="form-group">
+                           <label>Address</label>
+                           <textarea name="address" class="form-control" >{% for i in employee %}{{i.address}}{% endfor %}</textarea>
+                        </div>
+                     </div>
+
+                      <div class="col-12 ">
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select class="form-control" name="gender">
+                               <option>{% for i in employee %}{{i.gender}}{% endfor %}</option>
+                               <option>Female</option>
+                               <option>Male</option>
+                               <option>Others</option>
+                            </select>
+                        </div>
+                     </div>
+
+                 
+                     <div class="col-12 ">
+                        <div class="form-group">
+                            <label>Designation</label>
+                            <select class="form-control" name="designation_id">
+                               <option>{% for i in employee %}{{i.designation_id}} {% endfor %}</option>
+                               {% for i in designation %}
+                               <option value="{{i.id}}">{{i.name}}</option>
+                               {% endfor %}
+                               
+                            </select>
+                        </div>
+                     </div>
+                     <div class="col-12 ">
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <select class="form-control" name="duration_id">
+                              <option>{% for i in employee %}{{i.duration_id}} {% endfor %}</option>
+                               {% for i in duration %}
+                               <option value="{{i.id}}">{{i.joining_date}} To {{i.end_date}}</option>
+                               {% endfor %}
+                            </select>
+                        </div>
+                     </div>
+                      <div class="col-12">
+                         <button type="submit" class="btn btn-primary">Update Employee details</button>
+                      </div>
+                   </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+{% endblock %}
